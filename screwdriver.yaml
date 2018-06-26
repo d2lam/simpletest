@@ -3,9 +3,7 @@ shared:
 jobs:
   firstjob:
     steps:
-      - mystep: echo hi
-      - fail: commanddoesnotexist
-      - teardown-step1: echo hello
-      - teardown-step2: echo world
+      - getprvious: meta get sd@1182:firstjob
+      - mystep: meta set foo bar
     requires:
       - ~commit
