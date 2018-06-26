@@ -3,7 +3,9 @@ shared:
 jobs:
   firstjob:
     steps:
-      - fail: exit 1
-      - mystep-sd-teardown-stuff: echo should not run
+      - mystep: echo hi
+      - fail: commanddoesnotexist
+      - teardown-step1: echo hello
+      - teardown-step2: echo world
     requires:
       - ~commit
