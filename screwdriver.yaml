@@ -1,0 +1,9 @@
+shared:
+  image: node:6
+jobs:
+  firstjob:
+    steps:
+      - fail: exit 1
+      - mystep-sd-teardown-stuff: echo should not run
+    requires:
+      - ~commit
