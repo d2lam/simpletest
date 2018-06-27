@@ -1,9 +1,20 @@
 shared:
   image: node:6
 jobs:
-  firstjob:
+  main:
     steps:
-      - getprvious: meta get foo --external sd@1182:firstjob
-      - mystep: meta set foo bar
+      - set-unstable: |
+          if [ "$COVERAGE" -lt 95 ]
+            then curl -X PUT -H "Authorization: Bearer $SD_TOKEN" -H "Content-Type: application/json" -d '{"status": "UNSTABLE", "statusMessage": "this build is unstable"}' "${API_URL}/${SD_BUILD_ID}"
+          fi
+      - echo: echo "This build status is set as Unstable and will not trigger the next build"
+    environment:
+        COVERAGE: 90
+        API_URL: https://api.screwdriver.cd/v4/builds
     requires:
       - ~commit
+  publish:
+    steps:
+      - echo: echo "This will not be triggered"
+    requires:
+      - main
