@@ -4,7 +4,7 @@ jobs:
   main:
     steps:
       - echo: echo hi
-      - laststep: meta set buildstatus passed
+      - laststep: meta set buildstatus failed
       - teardown-test: export STATUS=`meta get buildstatus`; if [ $STATUS=="passed" ]; then echo "good"; else echo "bad"; fi;
       - teardown-echo: echo bye
     environment:
