@@ -3,11 +3,10 @@ shared:
 jobs:
   main:
     steps:
-      - set-unstable: |
-          if [ "$COVERAGE" -lt 95 ]
-            then curl -X PUT -H "Authorization: Bearer $SD_TOKEN" -H "Content-Type: application/json" -d '{"status": "UNSTABLE", "statusMessage": "this build is unstable"}' "${API_URL}/${SD_BUILD_ID}"
-          fi
-      - echo: echo "This build status is set as Unstable and will not trigger the next build"
+      - echo: echo hi
+      - laststep: meta set buildstatus passed
+      - teardown-test: export STATUS=`meta get buildstatus`; if STATUS=='passed'; echo 'hello'; fi;
+      - teardown-echo: echo bye
     environment:
         COVERAGE: 90
         API_URL: https://api.screwdriver.cd/v4/builds
