@@ -1,10 +1,14 @@
 shared:
-  image: node:6
+    image: node:6
 jobs:
-  main:
-    steps:
-      - echo: commanddoesnotexist
-      - laststep: meta set buildstatus passed
-      - teardown-test: export STATUS=`meta get buildstatus`; echo $STATUS; if [ $STATUS=="passed" ]; then echo "good"; else echo "bad"; fi;
-    requires:
-      - ~commit
+    test:
+        steps:
+            - echo: echo hi
+        requires: ~commit
+    test1:
+        steps:
+            - echo: sleep 20
+    test2:
+        steps:
+            - echo: echo bye
+        requires: [~test, ~test1]
