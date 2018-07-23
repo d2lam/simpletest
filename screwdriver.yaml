@@ -3,11 +3,18 @@ shared:
 jobs:
     test:
         steps:
-            - echo: echo hi
+            - export: export HELLO=123
+            - secret: echo $MYSECRET
+            - echo: prefix='export '; file=/tmp/buildEnv; newfile=/tmp/exportBuildEnv; env > $file; while read -r line; do echo \"${prefix}$line\"; done < $file > $newfile; mv $newfile $file;
+            - cat: /tmp/buildEnv
+            - fail: failstuff
+            - teardown-env: file=/tmp/buildEnv; . $file; rm $file; echo $HELLO;
         requires: ~commit
+        secrets:
+            - MYSECRET
     test1:
         steps:
-            - echo: sleep 20
+            - echo: echo bye
     test2:
         steps:
             - echo: echo bye
