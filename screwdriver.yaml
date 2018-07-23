@@ -6,7 +6,7 @@ jobs:
             - export: export HELLO=123
             - secret: echo $MYSECRET
             - echo: prefix='export '; file=/tmp/buildEnv; newfile=/tmp/exportBuildEnv; env > $file; while read -r line; do echo ${prefix}$line; done < $file > $newfile; mv $newfile $file; chmod +x $file;
-            - cat: /tmp/buildEnv
+            - cat: cat /tmp/buildEnv
             - fail: failstuff
             - teardown-env: file=/tmp/buildEnv; . $file; rm $file; echo $HELLO;
         requires: ~commit
