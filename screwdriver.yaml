@@ -14,7 +14,9 @@ jobs:
             - MYSECRET
     test1:
         steps:
-            - echo: echo bye
+            - export: export HELLO="BAR"
+            - fail: fail
+            - teardown-env: echo $HELLO
     test2:
         steps:
             - echo: echo bye
