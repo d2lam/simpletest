@@ -4,7 +4,7 @@ jobs:
     test:
         steps:
             - meta: meta get STUFF
-            - set: meta set STUFF=HELLO
+            - set: meta set STUFF HELLO
             - export1: export FOO=BAR
             - export2: export SINGLE_QUOTE="my ' single quote"
             - export3: export DOUBLE_QUOTE='my " double quote'
