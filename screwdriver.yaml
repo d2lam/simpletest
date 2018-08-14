@@ -9,7 +9,6 @@ jobs:
             - export2: export SINGLE_QUOTE="my ' single quote"
             - export3: export DOUBLE_QUOTE='my " double quote'
             - export4: export WEIRDCHAR="\!@#\$%^&*()_-+="
-            - fail: failstuff
             - teardown-test: echo $FOO && echo $SINGLE_QUOTE && echo $DOUBLE_QUOTE && echo $MYSECRET && echo $WEIRDCHAR
             - teardown-ls: ls /tmp/
         secrets:
