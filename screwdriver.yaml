@@ -1,6 +1,12 @@
 shared:
     image: node:6
 jobs:
+    publish:
+        steps:
+            - echo: echo hi
+            - things: echo things
+            - echo: echo bye
+        requires: [~pr, ~commit]
     test:
         steps:
             - meta: meta get STUFF
